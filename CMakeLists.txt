@@ -8,6 +8,11 @@ endif()
 
 project(groot)
 
+set (CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}
+	"D:/Development/Qt/5.15.2/mingw81_64"
+	# "D:/Development/vcpkg/installed/x64-windows"
+)
+
 find_package(Qt5 COMPONENTS  Core Widgets Gui OpenGL Xml Svg)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}  "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
@@ -81,8 +86,14 @@ set(CATKIN_ENABLE_TESTING OFF CACHE BOOL "")
 
 if(NOT catkin_FOUND AND NOT ament_cmake_FOUND)
     # look for BehaviorTree.CPP on the system
+    message(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    # set (BehaviorTreeV3_DIR "E:/Projects/_ref/BehaviorTree.CPP/build")
+    # set (BehaviorTreeV3_INCLUDE_DIRS "E:/Projects/_ref/BehaviorTree.CPP/include")
+    # set (BehaviorTreeV3_LIBRARIES "E:/Projects/_ref/BehaviorTree.CPP/build/bin")
+    # include_directories(${BehaviorTreeV3_INCLUDE_DIRS})
     find_package(BehaviorTreeV3)
     if (NOT BehaviorTree_FOUND)
+        message(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         # use git submodule only if you are not compiling with catkin
         add_subdirectory( depend/BehaviorTree.CPP )
         include_directories( depend/BehaviorTree.CPP/include )
@@ -125,18 +136,36 @@ set(FORMS_UI
   ./bt_editor/custom_node_dialog.ui
   )
 
+# set (ZMQ_INCLUDE_DIRS "E:/Projects/_ref/libzmq/include")
+# set (ZMQ_LIBRARIES "E:/Projects/_ref/libzmq/build/lib")
+# include_directories(${ZMQ_INCLUDE_DIRS})
+
 find_package(ZMQ)
 
-if( ZMQ_FOUND )
-    message(STATUS "ZeroMQ found.")
-    add_definitions( -DZMQ_FOUND )
+if (NOT ZMQ_FOUND)
+    add_subdirectory( depend/libzmq )
+    include_directories( depend/libzmq/include )
 
-    set(APP_CPPS ${APP_CPPS} ./bt_editor/sidepanel_monitor.cpp )
-    set(FORMS_UI ${FORMS_UI} ./bt_editor/sidepanel_monitor.ui )
+    add_subdirectory( depend/cppzmq )
+    include_directories( depend/cppzmq )
 
-else()
-    message(WARNING "ZeroMQ NOT found. Real-time monitoring disabled.")
+    set(ZMQ_FOUND TRUE)
 endif()
+
+add_definitions( -DZMQ_FOUND )
+set(APP_CPPS ${APP_CPPS} ./bt_editor/sidepanel_monitor.cpp )
+set(FORMS_UI ${FORMS_UI} ./bt_editor/sidepanel_monitor.ui )
+
+# if( ZMQ_FOUND )
+#     message(STATUS "ZeroMQ found.")
+#     add_definitions( -DZMQ_FOUND )
+
+#     set(APP_CPPS ${APP_CPPS} ./bt_editor/sidepanel_monitor.cpp )
+#     set(FORMS_UI ${FORMS_UI} ./bt_editor/sidepanel_monitor.ui )
+
+# else()
+#     message(WARNING "ZeroMQ NOT found. Real-time monitoring disabled.") 
+# endif()
 
 QT5_WRAP_UI(FORMS_HEADERS ${FORMS_UI})
 
@@ -160,12 +189,14 @@ if( ZMQ_FOUND )
 endif()
 
 target_link_libraries(behavior_tree_editor ${GROOT_DEPENDENCIES} )
+# target_link_libraries(behavior_tree_editor QtNodeEditor behaviortree_cpp_v3)
 
 
 add_executable(Groot ./bt_editor/main.cpp  ${RESOURCE_FILES})
-target_link_libraries(Groot behavior_tree_editor )
+# target_link_libraries(Groot behavior_tree_editor )
+target_link_libraries(Groot behaviortree_cpp_v3 behavior_tree_editor )
 
-add_subdirectory(test)
+# add_subdirectory(test)
 
 ######################################################
 # INSTALL

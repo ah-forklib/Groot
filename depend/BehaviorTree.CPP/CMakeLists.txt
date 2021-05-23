@@ -13,8 +13,6 @@ if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
-add_definitions(-Wpedantic)
-
 #---- Include boost to add coroutines ----
 find_package(Boost COMPONENTS coroutine QUIET)
 
@@ -42,7 +40,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 #---- project configuration ----
 option(BUILD_EXAMPLES   "Build tutorials and examples" ON)
-option(BUILD_UNIT_TESTS "Build the unit tests" ON)
+option(BUILD_UNIT_TESTS "Build the unit tests" OFF)
 option(BUILD_TOOLS "Build commandline tools" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
@@ -235,6 +233,7 @@ if( ZMQ_FOUND )
 endif()
 
 if(MSVC)
+    target_compile_options(${BEHAVIOR_TREE_LIBRARY} PRIVATE /W3 /WX)
 else()
     target_compile_options(${BEHAVIOR_TREE_LIBRARY} PRIVATE
         -Wall -Wextra -Werror=return-type)

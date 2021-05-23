@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 #ifdef _WIN32
 #pragma warning (disable:4996)
 #define WIN32_LEAN_AND_MEAN

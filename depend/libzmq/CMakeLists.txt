@@ -555,7 +555,6 @@ else()
   check_cxx_symbol_exists(if_nametoindex net/if.h HAVE_IF_NAMETOINDEX)
   check_cxx_symbol_exists(SO_PEERCRED sys/socket.h ZMQ_HAVE_SO_PEERCRED)
   check_cxx_symbol_exists(LOCAL_PEERCRED sys/socket.h ZMQ_HAVE_LOCAL_PEERCRED)
-  check_cxx_symbol_exists(SO_BUSY_POLL sys/socket.h ZMQ_HAVE_BUSY_POLL)
 endif()
 
 if(NOT MINGW)
@@ -1590,21 +1589,21 @@ endif()
 # -----------------------------------------------------------------------------
 # tests
 
-option(BUILD_TESTS "Whether or not to build the tests" ON)
+# option(BUILD_TESTS "Whether or not to build the tests" ON)
 
-set(ZMQ_BUILD_TESTS
-    ${BUILD_TESTS}
-    CACHE BOOL "Build the tests for ZeroMQ")
+# set(ZMQ_BUILD_TESTS
+#     ${BUILD_TESTS}
+#     CACHE BOOL "Build the tests for ZeroMQ")
 
-if(ZMQ_BUILD_TESTS)
-  enable_testing() # Enable testing only works in root scope
-  add_subdirectory(tests)
-  if(BUILD_STATIC)
-    add_subdirectory(unittests)
-  else()
-    message(WARNING "Not building unit tests, since BUILD_STATIC is not enabled")
-  endif()
-endif()
+# if(ZMQ_BUILD_TESTS)
+#   enable_testing() # Enable testing only works in root scope
+#   add_subdirectory(tests)
+#   if(BUILD_STATIC)
+#     add_subdirectory(unittests)
+#   else()
+#     message(WARNING "Not building unit tests, since BUILD_STATIC is not enabled")
+#   endif()
+# endif()
 
 # -----------------------------------------------------------------------------
 # installer
