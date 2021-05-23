@@ -195,6 +195,7 @@ const NodeModels &BuiltinNodeModels()
         factory.registerNodeType<BT::SubtreeNode>("Root");
 
         NodeModels out;
+        // <<<<<<<<<<<<<<<<<<<<<<<
         for( const auto& it: factory.manifests())
         {
             const auto& model_name = it.first;

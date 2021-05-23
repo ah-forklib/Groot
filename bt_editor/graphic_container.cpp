@@ -482,7 +482,10 @@ void GraphicContainer::createMorphSubMenu(QtNodes::Node &node, QMenu* nodeMenu)
     }
     else
     {
-        for(auto& name: names_in_category)
+        std::vector<QString> v;;
+        v.insert(v.end(), names_in_category.begin(), names_in_category.end());
+        std::sort(v.begin(), v.end());
+        for(auto& name: v)
         {
             auto action = new QAction(name, morph_submenu);
             morph_submenu->addAction(action);

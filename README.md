@@ -1,10 +1,10 @@
-# Groot (forked)
+# Groot for Windows
 
 + This is a forked modified Groot repo by [Aoi-hosizora](https://github.com/Aoi-hosizora). This is used by SCUT xxx (private) project.
 + For old README, please visit [README_old.md](./README_old.md).
 + Note that depended [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP), [cppzmq](https://github.com/zeromq/cppzmq) and [libzmq](https://github.com/zeromq/libzmq) are all submodule-deinited.
 
-## Build Groot in Windows and MinGW-x64
+## Build Groot on Windows and MinGW-x64
 
 ```bash
 # Change to Your Qt path (line 12)
