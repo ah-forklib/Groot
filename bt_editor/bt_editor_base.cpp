@@ -1,6 +1,9 @@
 #include "bt_editor_base.h"
 #include <behaviortree_cpp_v3/decorators/subtree_node.h>
 #include <QDebug>
+#include <QFile>
+#include <QFileInfo>
+#include "XML_utilities.hpp"
 
 void AbsBehaviorTree::clear()
 {
@@ -207,6 +210,28 @@ const NodeModels &BuiltinNodeModels()
             NodeModel groot_model;
             groot_model = bt_model;
             out.insert( { QString::fromStdString(model_name), std::move(groot_model) });
+        }
+
+        QString fileName = "custommed.xml";
+        if (QFileInfo::exists(fileName)) {
+            QFile file(fileName);
+            file.open(QIODevice::ReadOnly);
+            QString xml_text;
+            QTextStream in(&file);
+            while (!in.atEnd()) {
+                xml_text += in.readLine();
+            }
+
+            QDomDocument document;
+            if (document.setContent(xml_text)) {
+                for (const auto &it : ReadTreeNodesModel(document.documentElement())) {
+                    const auto &model_name = it.first;
+                    if (model_name == "SubTree" || model_name == "SubTreePlus") {
+                        continue;
+                    }
+                    out.insert({model_name, std::move(it.second)});
+                }
+            }
         }
         return out;
      }();

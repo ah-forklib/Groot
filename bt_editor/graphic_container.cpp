@@ -482,7 +482,7 @@ void GraphicContainer::createMorphSubMenu(QtNodes::Node &node, QMenu* nodeMenu)
     }
     else
     {
-        std::vector<QString> v;;
+        std::vector<QString> v;
         v.insert(v.end(), names_in_category.begin(), names_in_category.end());
         std::sort(v.begin(), v.end());
         for(auto& name: v)
@@ -597,7 +597,10 @@ void GraphicContainer::onConnectionContextMenu(QtNodes::Connection &connection, 
             submenu->setEnabled(false);
         }
         else{
-            for(auto& name: model_names)
+            std::vector<QString> v;
+            v.insert(v.end(), model_names.begin(), model_names.end());
+            std::sort(v.begin(), v.end());
+            for(auto& name: v)
             {
                 auto action = new QAction(name, submenu);
                 submenu->addAction(action);
