@@ -212,7 +212,7 @@ const NodeModels &BuiltinNodeModels()
             out.insert( { QString::fromStdString(model_name), std::move(groot_model) });
         }
 
-        QString fileName = "custommed.xml";
+        QString fileName = "customized.xml";
         if (QFileInfo::exists(fileName)) {
             QFile file(fileName);
             file.open(QIODevice::ReadOnly);

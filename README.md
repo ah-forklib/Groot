@@ -16,8 +16,4 @@ cd build
 
 cmake .. -G "MinGW Makefiles"
 make -j8
-
-# make 中途可能会报未找到 `-lzmq` 的错误
-# 需要把已经编译出来的 build\depend\libzmq\lib 的 libzmq.a 和 libzmq.dll.a 复制到 mingw 的 lib 下，然后继续编译即可
-# xxx\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\lib
 ```
