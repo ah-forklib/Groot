@@ -2,6 +2,7 @@
 #include "bt_editor/sidepanel_editor.h"
 #include <QAction>
 #include <QLineEdit>
+#include <QTextCodec>
 
 class EditorTest : public GrootTestBase
 {
@@ -56,7 +57,9 @@ void EditorTest::loadFile()
     QFile qFile("crossdoor_EditorTest_loadFile.xml");
     if (qFile.open(QIODevice::WriteOnly))
     {
-        QTextStream out(&qFile); out << saved_xml;
+        QTextStream out(&qFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out << saved_xml;
         qFile.close();
     }
 
@@ -143,6 +146,7 @@ void EditorTest::savedFileSameAsOriginal()
     if (qFile.open(QIODevice::WriteOnly))
     {
         QTextStream out(&qFile);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
         out << saved_xml;
         qFile.close();
     }

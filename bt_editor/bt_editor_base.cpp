@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QTextCodec>
 #include "XML_utilities.hpp"
 
 void AbsBehaviorTree::clear()
@@ -212,12 +213,13 @@ const NodeModels &BuiltinNodeModels()
             out.insert( { QString::fromStdString(model_name), std::move(groot_model) });
         }
 
-        QString fileName = "customized.xml";
+        QString fileName = "customized.xml"; // <<<
         if (QFileInfo::exists(fileName)) {
             QFile file(fileName);
             file.open(QIODevice::ReadOnly);
             QString xml_text;
             QTextStream in(&file);
+            in.setCodec(QTextCodec::codecForName("UTF-8"));
             while (!in.atEnd()) {
                 xml_text += in.readLine();
             }

@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QFileInfo>
+#include <QTextCodec>
 #include <QMenu>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -293,6 +294,7 @@ void SidepanelEditor::on_buttonUpload_clicked()
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         QTextStream stream(&file);
+        stream.setCodec(QTextCodec::codecForName("UTF-8"));
         stream << doc.toString(4) << endl;
     }
 

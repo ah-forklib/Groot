@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QTextCodec>
 #include <QTextStream>
 #include <QList>
 #include <QMap>
@@ -425,6 +426,7 @@ void MainWindow::on_actionLoad_triggered()
     QString xml_text;
 
     QTextStream in(&file);
+    in.setCodec(QTextCodec::codecForName("UTF-8")); // <<<
     while (!in.atEnd()) {
         xml_text += in.readLine();
     }
@@ -643,6 +645,7 @@ void MainWindow::on_actionSave_triggered()
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         QTextStream stream(&file);
+        stream.setCodec(QTextCodec::codecForName("UTF-8"));
         stream << xml_text << endl;
     }
 
