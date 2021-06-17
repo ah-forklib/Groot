@@ -25,6 +25,10 @@ main(int argc, char *argv[])
     app.setOrganizationName("EurecatRobotics");
     app.setOrganizationDomain("eurecat.org");
 
+    QFont font = QApplication::font("QMessageBox");
+    QApplication::setFont(font);
+    QApplication::setStyle("fusion");
+
     qRegisterMetaType<AbsBehaviorTree>();
 
     QCommandLineParser parser;

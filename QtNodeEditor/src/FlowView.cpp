@@ -47,6 +47,10 @@ FlowView(QWidget *parent)
 
   setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
+	setOptimizationFlags(QGraphicsView::DontClipPainter);
+	setOptimizationFlags(QGraphicsView::DontSavePainterState);
+	setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
+
   setCacheMode(QGraphicsView::CacheBackground);
 
   //setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));

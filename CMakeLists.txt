@@ -193,6 +193,7 @@ target_link_libraries(behavior_tree_editor ${GROOT_DEPENDENCIES} )
 
 
 add_executable(Groot ./bt_editor/main.cpp  ${RESOURCE_FILES})
+set_target_properties(Groot PROPERTIES WIN32_EXECUTABLE TRUE)
 # target_link_libraries(Groot behavior_tree_editor )
 target_link_libraries(Groot behaviortree_cpp_v3 behavior_tree_editor )
 
