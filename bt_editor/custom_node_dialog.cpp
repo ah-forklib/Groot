@@ -279,7 +279,8 @@ void CustomNodeDialog::on_comboBox_currentIndexChanged(const QString &node_type)
 
             auto value_item = new QTableWidgetItem ("false");
 
-            auto description_item = new QTableWidgetItem ("If false (default), the Subtree has an isolated blackboard and needs port remapping");
+            // auto description_item = new QTableWidgetItem ("If false (default), the Subtree has an isolated blackboard and needs port remapping");
+            auto description_item = new QTableWidgetItem ("");
             description_item->setFlags(description_item->flags() & ~Qt::ItemIsEditable );
 
             ui->tableWidget->setItem(row, 0, key_item);

@@ -6,8 +6,8 @@ SubtreeNodeModel::SubtreeNodeModel(const NodeModel &model):
     BehaviorTreeDataModel ( model ),
     _expanded(false)
 {
-    _line_edit_name->setReadOnly(true);
-    _line_edit_name->setHidden(true);
+    // _line_edit_name->setReadOnly(true);
+    // _line_edit_name->setHidden(true);
 
     _expand_button = new QPushButton( _expanded ? "Collapse" : "Expand", _main_widget );
     _expand_button->setMaximumWidth(100);
@@ -43,7 +43,7 @@ void SubtreeNodeModel::setExpanded(bool expand)
 
 void SubtreeNodeModel::setInstanceName(const QString &name)
 {
-    _line_edit_name->setHidden( name == registrationName() );
+    // _line_edit_name->setHidden( name == registrationName() );
     BehaviorTreeDataModel::setInstanceName(name);
 }
 

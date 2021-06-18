@@ -19,7 +19,7 @@ EditorFlowScene::EditorFlowScene(std::shared_ptr<QtNodes::DataModelRegistry> reg
 
 }
 
-QtNodes::Node &EditorFlowScene::createNodeAtPos(const QString &ID, const QString &instance_name, QPointF scene_pos)
+QtNodes::Node &EditorFlowScene::createNodeAtPos(const QString &ID, const QString &instance_name, const PortsMapping &ports, QPointF scene_pos)
 {
     auto node_model = registry().create(ID);
     if( !node_model )
@@ -31,11 +31,20 @@ QtNodes::Node &EditorFlowScene::createNodeAtPos(const QString &ID, const QString
     }
     auto bt_model = dynamic_cast<BehaviorTreeDataModel*>( node_model.get() );
     bt_model->setInstanceName( instance_name );
+    for (auto iter = ports.begin(); iter != ports.end(); iter++) {
+        auto kv = *iter;
+        bt_model->setPortMapping(kv.first, kv.second);
+    }
     bt_model->initWidget();
     auto& node_qt = createNode(std::move(node_model));
     setNodePosition(node_qt, scene_pos);
 
     return node_qt;
+}
+
+QtNodes::Node &EditorFlowScene::createNodeAtPos(const QString &ID, const QString &instance_name, QPointF scene_pos)
+{
+    return createNodeAtPos(ID, instance_name, {}, scene_pos);
 }
 
 void EditorFlowScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -89,7 +98,8 @@ void EditorFlowScene::keyPressEvent(QKeyEvent *event)
         if( !node_model ) return;
 
         _clipboard_node.model = node_model->model();
-        _clipboard_node.instance_name  = node_model->instanceName();
+        _clipboard_node.instance_name = node_model->instanceName();
+        _clipboard_node.ports_mapping = node_model->getCurrentPortMapping();
     }
     else if( event->key() == Qt::Key_V &&
              event->modifiers() == Qt::ControlModifier &&
@@ -102,6 +112,7 @@ void EditorFlowScene::keyPressEvent(QKeyEvent *event)
 
         createNodeAtPos( registration_ID,
                         _clipboard_node.instance_name,
+                        _clipboard_node.ports_mapping,
                         scene_pos );
     }
     else{
@@ -112,6 +123,7 @@ void EditorFlowScene::keyPressEvent(QKeyEvent *event)
 
 void EditorFlowScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+    // useless
     if(!_editor_locked && event->mimeData()->hasFormat("application/x-qabstractitemmodeldatalist")  )
     {
         QByteArray encoded = event->mimeData()->data("application/x-qabstractitemmodeldatalist");
@@ -128,7 +140,7 @@ void EditorFlowScene::dropEvent(QGraphicsSceneDragDropEvent *event)
             if (it != roleDataMap.end() )
             {
                 const auto& ID = it.value().toString();
-                createNodeAtPos( ID, ID, scene_pos);
+                createNodeAtPos( ID, ID, {}, scene_pos);
             }
         }
     }

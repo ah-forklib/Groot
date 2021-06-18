@@ -14,6 +14,7 @@ public:
     bool isLocked() const { return _editor_locked; }
     void lock(bool lock_editor) { _editor_locked = lock_editor; }
 
+    QtNodes::Node& createNodeAtPos(const QString& ID, const QString& instance_name, const PortsMapping &ports, QPointF scene_pos);
     QtNodes::Node& createNodeAtPos(const QString& ID, const QString& instance_name, QPointF scene_pos);
 
 private:
