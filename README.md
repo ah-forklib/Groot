@@ -17,3 +17,26 @@ cd build
 cmake .. -G "MinGW Makefiles"
 make -j8
 ```
+
+## Note
+
++ Allow to define your owned builtin models and styles in `customized.xml`.
+
+```xml
+<root>
+    <TreeNodesModel>
+        <Decorator ID="IgnoreAndFailure"/>
+        <Decorator ID="IgnoreAndSuccess"/>
+    </TreeNodesModel>
+    <TreeNodesStyle>
+        <Decorator ID="IgnoreAndFailure">
+            <icon>svg/failure.svg</icon>
+            <caption_color>#ff2222</caption_color>
+        </Decorator>
+        <Decorator ID="IgnoreAndSuccess">
+            <icon>svg/success.svg</icon>
+            <caption_color>#00FF00</caption_color>
+        </Decorator>
+    </TreeNodesStyle>
+</root>
+```

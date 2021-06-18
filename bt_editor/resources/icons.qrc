@@ -21,6 +21,9 @@
         <file>svg/not_equal.svg</file>
         <file>svg/letter_C.svg</file>
         <file>svg/letter_A.svg</file>
+        <file>svg/letter_D.svg</file>
+        <file>svg/success.svg</file>
+        <file>svg/failure.svg</file>
         <file>svg/logo_splashscreen.svg</file>
         <file>svg/list_add.svg</file>
         <file>svg/settings.svg</file>

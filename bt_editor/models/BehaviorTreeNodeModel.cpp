@@ -6,9 +6,11 @@
 #include <QComboBox>
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QFont>
 #include <QApplication>
 #include <QJsonDocument>
+#include <QTextCodec>
 
 const int MARGIN = 10;
 const int DEFAULT_LINE_WIDTH  = 100;
@@ -340,8 +342,9 @@ void BehaviorTreeDataModel::readStyle()
         return;
     }
     QString model_type_name( QString::fromStdString(toStr(_model.type)) );
+    QString model_id = _model.registration_ID;
 
-    for (const auto& model_name: { model_type_name, _model.registration_ID} )
+    for (const auto& model_name: { model_type_name, model_id} )
     {
         if( toplevel_object.contains(model_name) )
         {
@@ -357,6 +360,54 @@ void BehaviorTreeDataModel::readStyle()
             if( category_style.contains("caption_alias"))
             {
                 _style_caption_alias = category_style["caption_alias"].toString();
+            }
+        }
+    }
+
+    QString fileName = "customized.xml"; // <<<
+    if (!QFileInfo::exists(fileName)) {
+        qDebug()<<"customized.xml not found.";
+        return;
+    }
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+    QString xml_text;
+    QTextStream in(&file);
+    in.setCodec(QTextCodec::codecForName("UTF-8"));
+    while (!in.atEnd()) {
+        xml_text += in.readLine();
+    }
+    QString errorMessage;
+    QDomDocument document;
+    if (!document.setContent(xml_text, &errorMessage)) {
+        qDebug() << "error on customized.xml: " << errorMessage <<".";
+        return;
+    }
+
+    QDomElement model_root = document.documentElement().firstChildElement("TreeNodesStyle");
+    if (model_root.isNull()) {
+        qDebug()<<"XML object is empty.";
+        return;
+    }
+    for (QDomElement node = model_root.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
+        if (node.tagName() != model_type_name) {
+            continue;
+        }
+        if (!node.hasAttribute("ID")) {
+            continue;
+        }
+        if (node.attribute("ID") == model_id) {
+            QDomElement icon_el = node.firstChildElement("icon");
+            if (!icon_el.isNull()) {
+                _style_icon = icon_el.text();
+            }
+            QDomElement color_el = node.firstChildElement("caption_color");
+            if (!color_el.isNull()) {
+                _style_caption_color = color_el.text();
+            }
+            QDomElement alias_el = node.firstChildElement("caption_alias");
+            if (!alias_el.isNull()) {
+                _style_caption_alias = alias_el.text();
             }
         }
     }

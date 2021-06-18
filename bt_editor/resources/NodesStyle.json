@@ -8,7 +8,12 @@
         "caption_color":  "#44bb44"
     },
 
+    "Control": {
+        "icon": ":/icons/svg/letter_C.svg"
+    },
+
     "Decorator": {
+        "icon": ":/icons/svg/letter_D.svg",
         "caption_color":  "#ffee77"
     },
 
@@ -17,24 +22,24 @@
     },
 
     "AlwaysFailure": {
-        "icon": ":/icons/svg/letter_A.svg",
+        "icon": ":/icons/svg/failure.svg",
         "caption_color":  "#ff2222",
         "caption_alias": "Failure"
     },
 
     "ForceFailure": {
-        "icon": ":/icons/svg/letter_A.svg",
+        "icon": ":/icons/svg/failure.svg",
         "caption_color":  "#ff2222"
     },
 
     "AlwaysSuccess": {
-        "icon": ":/icons/svg/letter_A.svg",
+        "icon": ":/icons/svg/success.svg",
         "caption_color":  "#00FF00",
         "caption_alias": "Success"
     },
 
     "ForceSuccess": {
-        "icon": ":/icons/svg/letter_A.svg",
+        "icon": ":/icons/svg/success.svg",
         "caption_color":  "#00FF00"
     },
 
