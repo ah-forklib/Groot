@@ -2,89 +2,113 @@
     "Action": {
         "icon": ":/icons/svg/letter_A.svg"
     },
-
     "Condition": {
         "icon": ":/icons/svg/letter_C.svg",
-        "caption_color":  "#44bb44"
+        "caption_color": "#44bb44"
     },
-
     "Control": {
         "icon": ":/icons/svg/letter_C.svg"
     },
-
     "Decorator": {
         "icon": ":/icons/svg/letter_D.svg",
-        "caption_color":  "#ffee77"
+        "caption_color": "#ffee77"
     },
-
     "SubTree": {
         "icon": ":/icons/svg/subtree.svg"
     },
 
     "AlwaysFailure": {
         "icon": ":/icons/svg/failure.svg",
-        "caption_color":  "#ff2222",
+        "caption_color": "#ff2222",
         "caption_alias": "Failure"
     },
-
-    "ForceFailure": {
-        "icon": ":/icons/svg/failure.svg",
-        "caption_color":  "#ff2222"
-    },
-
     "AlwaysSuccess": {
         "icon": ":/icons/svg/success.svg",
-        "caption_color":  "#00FF00",
+        "caption_color": "#00FF00",
         "caption_alias": "Success"
     },
-
-    "ForceSuccess": {
-        "icon": ":/icons/svg/success.svg",
-        "caption_color":  "#00FF00"
-    },
-
     "SetBlackboard": {
         "icon": ":/icons/svg/edit_list.svg"
     },
-
-    "RetryUntilSuccesful": {
-        "icon": ":/icons/svg/retry.svg"
+    
+    "Fallback": {
+        "icon": ":/icons/svg/fallback.svg",
+        "caption_color": "#77ccff"
+    },
+    "IfThenElse": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "Parallel": {
+        "icon": ":/icons/svg/parallel.svg"
+    },
+    "ReactiveFallback": {
+        "icon": ":/icons/svg/fallback_reactive.svg",
+        "caption_color": "#44aadd"
+    },
+    "ReactiveSequence": {
+        "icon": ":/icons/svg/sequence_reactive.svg",
+        "caption_color": "#ff77aa"
+    },
+    "Sequence": {
+        "icon": ":/icons/svg/sequence.svg",
+        "caption_color": "#ff99bb"
+    },
+    "SequenceStar": {
+        "icon": ":/icons/svg/sequence_star.svg",
+        "caption_color": "#ffaacc"
+    },
+    "Switch2": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "Switch3": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "Switch4": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "Switch5": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "Switch6": {
+        "icon": ":/icons/svg/condition.svg"
+    },
+    "WhileDoElse": {
+        "icon": ":/icons/svg/while_do.svg"
     },
 
+    "BlackboardCheckDouble": {
+        "icon": ":/icons/svg/check_list.svg"
+    },
+    "BlackboardCheckInt": {
+        "icon": ":/icons/svg/check_list.svg"
+    },
+    "BlackboardCheckString": {
+        "icon": ":/icons/svg/check_list.svg"
+    },
+    "Delay": {
+        "icon": ":/icons/svg/timeout.svg"
+    },
+    "ForceFailure": {
+        "icon": ":/icons/svg/failure.svg",
+        "caption_color": "#ff2222"
+    },
+    "ForceSuccess": {
+        "icon": ":/icons/svg/success.svg",
+        "caption_color": "#00FF00"
+    },
     "Inverter": {
         "icon": ":/icons/svg/not_equal.svg"
     },
-
+    "KeepRunningUntilFailure": {
+        "icon": ":/icons/svg/repeat_until_failure.svg"
+    },
     "Repeat": {
         "icon": ":/icons/svg/repeat.svg"
     },
-
+    "RetryUntilSuccesful": {
+        "icon": ":/icons/svg/retry.svg"
+    },
     "Timeout": {
         "icon": ":/icons/svg/timeout.svg"
-    },
-
-    "Sequence": {
-        "icon": ":/icons/svg/sequence.svg",
-        "caption_color":  "#ff99bb"
-    },
-
-    "SequenceStar": {
-        "icon": ":/icons/svg/sequence_star.svg",
-        "caption_color":  "#ffaacc"
-    },
-
-    "ReactiveSequence": {
-        "icon": ":/icons/svg/sequence_reactive.svg",
-        "caption_color":  "#ff77aa"
-    },
-
-    "Fallback": {
-        "icon": ":/icons/svg/fallback.svg",
-        "caption_color":  "#77ccff"
-    },
-
-    "ReactiveFallback": {
-        "icon": ":/icons/svg/fallback_reactive.svg",
-        "caption_color":  "#44aadd"
     }
 }

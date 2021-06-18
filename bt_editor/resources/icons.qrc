@@ -24,6 +24,11 @@
         <file>svg/letter_D.svg</file>
         <file>svg/success.svg</file>
         <file>svg/failure.svg</file>
+        <file>svg/check_list.svg</file>
+        <file>svg/parallel.svg</file>
+        <file>svg/condition.svg</file>
+        <file>svg/repeat_until_failure.svg</file>
+        <file>svg/while_do.svg</file>
         <file>svg/logo_splashscreen.svg</file>
         <file>svg/list_add.svg</file>
         <file>svg/settings.svg</file>
