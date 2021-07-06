@@ -278,7 +278,12 @@ void GraphicContainer::createSubtree(Node &root_node, QString subtree_name )
         return;
     }
 
-    addNewModel( { NodeType::SUBTREE, subtree_name, {}} );
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    PortModel pm;
+    pm.type_name = "boolean";
+    pm.direction = PortDirection::INPUT;
+    pm.default_value = "false";
+    addNewModel( { NodeType::SUBTREE, subtree_name, { {"__shared_blackboard", pm} }} ); // PortModels
     QApplication::processEvents();
 
     auto sub_tree = BuildTreeFromScene(_scene, &root_node);

@@ -890,6 +890,7 @@ void MainWindow::onRequestSubTreeExpand(GraphicContainer& container,
 }
 
 
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 void MainWindow::onAddToModelRegistry(const NodeModel &model)
 {
     namespace util = QtNodes::detail;
