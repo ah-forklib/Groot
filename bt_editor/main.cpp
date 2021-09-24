@@ -16,14 +16,17 @@ using QtNodes::FlowViewStyle;
 using QtNodes::NodeStyle;
 using QtNodes::ConnectionStyle;
 
-int
-main(int argc, char *argv[])
+void messageHandler(QtMsgType type, const QMessageLogContext & context, const QString &msg);
+
+int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setApplicationName("Groot");
     app.setWindowIcon(QPixmap(":/icons/BT.png"));
     app.setOrganizationName("EurecatRobotics");
     app.setOrganizationDomain("eurecat.org");
+
+    qInstallMessageHandler(messageHandler);
 
     QFont font = QApplication::font("QMessageBox");
     QApplication::setFont(font);
@@ -34,10 +37,6 @@ main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.setApplicationDescription("Groot. The fancy BehaviorTree Editor");
     parser.addHelpOption();
-
-    QCommandLineOption test_option(QStringList() << "t" << "test",
-                                   "Load dummy data");
-    parser.addOption(test_option);
 
     QCommandLineOption mode_option(QStringList() << "mode",
                                    "Start in one of these modes: [editor,monitor,replay]",
@@ -50,19 +49,10 @@ main(int argc, char *argv[])
     QString style( styleFile.readAll() );
     app.setStyleSheet( style );
 
-    if( parser.isSet(test_option) )
-    {
-        MainWindow win( GraphicMode::EDITOR );
-        win.setWindowTitle("Groot");
-        win.show();
-        win.loadFromXML( ":/crossdoor_with_subtree.xml" );
-        return app.exec();
-    }
-    else{
+    if (true) {
         auto mode = GraphicMode::EDITOR;
 
-        if( parser.isSet(mode_option) )
-        {
+        if (parser.isSet(mode_option)) {
             QString opt_mode = parser.value(mode_option);
             if( opt_mode == "editor")
             {
@@ -81,8 +71,7 @@ main(int argc, char *argv[])
                           << std::endl;
                 return 0;
             }
-        }
-        else{
+        } else {
             StartupDialog dialog;
             dialog.setWindowFlags( Qt::FramelessWindowHint );
             if(dialog.exec() != QDialog::Accepted)
@@ -95,5 +84,24 @@ main(int argc, char *argv[])
         MainWindow win( mode );
         win.show();
         return app.exec();
+    }
+}
+
+void messageHandler(QtMsgType type, const QMessageLogContext& context, const QString &msg) {
+    QString time = QDateTime::currentDateTime().toString("yyyy/MM/dd HH:mm:ss");
+    QString level;
+    switch (type) {
+        case QtDebugMsg:    level = "DBG"; break;
+        case QtInfoMsg:     level = "INF"; break;
+        case QtWarningMsg:  level = "WRN"; break;
+        case QtCriticalMsg: level = "CRT"; break;
+        case QtFatalMsg:    level = "FTL"; break;
+        default:            level = "???"; break;
+    }
+    QString category = context.category;
+
+    if (MainWindow::loggerTextBox != nullptr) {
+        QString content = QObject::tr("[%1] [%2] (%3): %4").arg(time).arg(level).arg(category).arg(msg);
+        MainWindow::loggerTextBox->append(content);
     }
 }

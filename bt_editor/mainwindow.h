@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QTextEdit>
 #include <nodes/Node>
 #include <QTreeWidgetItem>
 #include <QShortcut>
@@ -135,6 +136,8 @@ private slots:
 public:
 
     void lockEditing(const bool locked);
+
+    static QTextEdit *loggerTextBox;
 
 private:
 

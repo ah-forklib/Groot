@@ -701,34 +701,82 @@ QToolButton:disabled{
          <number>4</number>
         </property>
         <item>
-         <widget class="QTabWidget" name="tabWidget">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QSplitter" name="splitter2">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>0</height>
-           </size>
+          <property name="lineWidth">
+           <number>3</number>
           </property>
-          <property name="baseSize">
-           <size>
-            <width>500</width>
-            <height>0</height>
-           </size>
+          <property name="midLineWidth">
+           <number>1</number>
           </property>
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="acceptDrops">
-           <bool>true</bool>
+          <property name="handleWidth">
+           <number>3</number>
           </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
-          </property>
+          <widget class="QTabWidget" name="tabWidget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>500</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="acceptDrops">
+            <bool>true</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+           </property>
+          </widget>
+          <widget class="QTextEdit" name="loggerTextBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>80</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>250</height>
+            </size>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(45, 45, 45);
+color: rgb(255, 255, 255);
+margin: 0px 3px;</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -743,7 +791,7 @@ QToolButton:disabled{
      <x>0</x>
      <y>0</y>
      <width>814</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLoad">

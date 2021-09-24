@@ -41,6 +41,8 @@ using QtNodes::FlowScene;
 using QtNodes::NodeGraphicsObject;
 using QtNodes::NodeState;
 
+QTextEdit *MainWindow::loggerTextBox = nullptr;
+
 MainWindow::MainWindow(GraphicMode initial_mode, QWidget *parent) :
                                                                     QMainWindow(parent),
                                                                     ui(new Ui::MainWindow),
@@ -48,6 +50,8 @@ MainWindow::MainWindow(GraphicMode initial_mode, QWidget *parent) :
                                                                     _current_layout(QtNodes::PortLayout::Vertical)
 {
     ui->setupUi(this);
+    ui->loggerTextBox->setContentsMargins(3, 3, 3, 3);
+    this->loggerTextBox = ui->loggerTextBox;
 
     QSettings settings;
     restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
